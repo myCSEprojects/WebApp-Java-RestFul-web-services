@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie Pick Services</title>
+
+<style type="text/css">
+			html, body {
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+		
+			
+
+			#outer {
+				width: 100%;
+				height: 100%;
+				min-width: 800px;
+				min-height: 400px;
+				position: relative;
+			}
+			#inner {
+				width: 800px;
+				height: 300px;
+				margin: -150px 0 0 -400px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+			}
+			#inner:after {
+				content: url( img/shadow.png );
+				opacity: 0.5;
+				position: absolute;
+				bottom: -50px;
+				left: 70px;
+			}
+			.carousel {
+				width: 400px;
+				height: 300px;
+				overflow: hidden;
+				float: left;
+			}
+			.carousel img {
+				display: block;
+				float: left;
+			}
+			#carousel-txt {
+				height: 30px;
+				position: absolute;
+				top: 135px;
+				right: 0;
+				z-index: 2;
+			}
+			#carousel-txt h3 {
+				text-shadow: 0 2px 5px rgb( 150, 50, 50 );
+				color: #fff;
+				font-size: 30px;
+				font-weight: bold;
+				line-height: 30px;
+				width: 400px;
+				height: 30px;
+				padding-left: 30px;
+				margin: 0;
+				float: left;
+			}
+		//overlay
+                        #overlay {
+				background: rgba( 250, 50, 50, 0.5 );
+				width: 400px;
+				height: 530px;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			#prev,
+			#next {
+				background: rgb( 150, 50, 50 );
+				color: #fff;
+				font-size: 30px;
+				font-weight: bold;
+				line-height: 37px;
+				text-align: center;
+				text-decoration: none;
+				display: block;
+				width: 40px;
+				height: 40px;
+				margin-top: -20px;
+				position: absolute;
+				top: 50%;
+				z-index: 4;
+			}
+			#prev {
+				right: 50px;
+			}
+			#next {
+				right: 0;
+			}
+			#prev:hover {
+				text-indent: -5px;				
+			}
+			#next:hover {
+				text-indent: 5px;
+			}
+
+			#donate-spacer {
+				height: 0;
+			}
+			#donate {
+				border-top: 1px solid #999;
+				width: 750px;
+				padding: 50px 75px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			#donate p, #donate form {
+				margin: 0;
+				float: left;
+			}
+			#donate p {
+				width: 650px;
+				color: #fff;
+			}
+			#donate form {
+				width: 100px;
+			}
+	
+           
+    
+    
+    
+    
+    body {
+                    //width: 600px;
+                    //margin: 40px auto;
+                    font-family: 'trebuchet MS', 'Lucida sans', Arial;
+                    font-size: 14px;
+                    color: #444;
+                   
+                }
+                
+    
+        
+
+                table {
+                    *border-collapse: collapse; /* IE7 and lower */
+                    border-spacing: 0;
+                    width: 100%;    
+                }
+
+                .bordered {
+                    border: solid #ccc 1px;
+                    -moz-border-radius: 6px;
+                    -webkit-border-radius: 6px;
+                    border-radius: 6px;
+                    -webkit-box-shadow: 0 1px 1px #ccc; 
+                    -moz-box-shadow: 0 1px 1px #ccc; 
+                    box-shadow: 0 1px 1px #ccc;         
+                }
+
+                .bordered tr:hover {
+                    background: #fbf8e9;
+                    -o-transition: all 0.1s ease-in-out;
+                    -webkit-transition: all 0.1s ease-in-out;
+                    -moz-transition: all 0.1s ease-in-out;
+                    -ms-transition: all 0.1s ease-in-out;
+                    transition: all 0.1s ease-in-out;     
+                }    
+
+                .bordered td, .bordered th {
+                    border-left: 1px solid #ccc;
+                    border-top: 1px solid #ccc;
+                    padding: 10px;
+                    text-align: left;    
+                }
+
+                .bordered th {
+                    background-color: #dce9f9;
+                    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+                    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+                    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+                    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+                    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
+                    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
+                    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+                    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+                    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+                    border-top: none;
+                    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+                }
+
+                .bordered td:first-child, .bordered th:first-child {
+                    border-left: none;
+                }
+
+                .bordered th:first-child {
+                    -moz-border-radius: 6px 0 0 0;
+                    -webkit-border-radius: 6px 0 0 0;
+                    border-radius: 6px 0 0 0;
+                }
+
+                .bordered th:last-child {
+                    -moz-border-radius: 0 6px 0 0;
+                    -webkit-border-radius: 0 6px 0 0;
+                    border-radius: 0 6px 0 0;
+                }
+
+                .bordered th:only-child{
+                    -moz-border-radius: 6px 6px 0 0;
+                    -webkit-border-radius: 6px 6px 0 0;
+                    border-radius: 6px 6px 0 0;
+                }
+
+                .bordered tr:last-child td:first-child {
+                    -moz-border-radius: 0 0 0 6px;
+                    -webkit-border-radius: 0 0 0 6px;
+                    border-radius: 0 0 0 6px;
+                }
+
+                .bordered tr:last-child td:last-child {
+                    -moz-border-radius: 0 0 6px 0;
+                    -webkit-border-radius: 0 0 6px 0;
+                    border-radius: 0 0 6px 0;
+                }
+
+
+                
+            .form-style-2{
+                max-width: 500px;
+                padding: 20px 12px 10px 20px;
+                font: 13px Arial, Helvetica, sans-serif;
+            }
+            .form-style-2-heading{
+                font-weight: bold;
+                font-style: italic;
+                border-bottom: 2px solid #ddd;
+                margin-bottom: 20px;
+                font-size: 15px;
+                padding-bottom: 3px;
+            }
+            .form-style-2 label{
+                display: block;
+                margin: 0px 0px 15px 0px;
+            }
+            .form-style-2 label > span{
+                width: 100px;
+                font-weight: bold;
+                float: left;
+                padding-top: 8px;
+                padding-right: 5px;
+            }
+            .form-style-2 span.required{
+                color:red;
+            }
+            .form-style-2 .tel-number-field{
+                width: 40px;
+                text-align: center;
+            }
+            .form-style-2 input.input-field{
+                width: 48%;
+
+            }
+
+            .form-style-2 input.input-field, 
+            .form-style-2 .tel-number-field, 
+            .form-style-2 .textarea-field, 
+             .form-style-2 .select-field{
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                border: 1px solid #C2C2C2;
+                box-shadow: 1px 1px 4px #EBEBEB;
+                -moz-box-shadow: 1px 1px 4px #EBEBEB;
+                -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                padding: 7px;
+                outline: none;
+            }
+            .form-style-2 .input-field:focus, 
+            .form-style-2 .tel-number-field:focus, 
+            .form-style-2 .textarea-field:focus,  
+            .form-style-2 .select-field:focus{
+                border: 1px solid #0C0;
+            }
+            .form-style-2 .textarea-field{
+                height:100px;
+                width: 55%;
+            }
+            .form-style-2 input[type=submit],
+            .form-style-2 input[type=button]{
+                border: none;
+                padding: 8px 15px 8px 15px;
+                background: #FF8500;
+                color: #fff;
+                box-shadow: 1px 1px 4px #DADADA;
+                -moz-box-shadow: 1px 1px 4px #DADADA;
+                -webkit-box-shadow: 1px 1px 4px #DADADA;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+            }
+            .form-style-2 input[type=submit]:hover,
+            .form-style-2 input[type=button]:hover{
+                background: #EA7B00;
+                color: #fff;
+            }
+                 
+        
+</style>
+
+<script src="Scripts/jquery-1.11.0.js"></script>
+<script src="Scripts/jquery.ui.core.js"></script>
+<script src="Scripts/jquery.ui.datepicker.js" type="text/javascript"></script>
+<script src="Scripts/jquery.carouFredSel-6.2.0-packed.js" type="text/javascript"></script>
+
+<script>
+
+var movieArray = new Array();
+var movieArrayGen = new Array();
+var movieArrayThe = new Array();
+var movieArrayRat = new Array();
+
+
+
+function Movie(movieName, rating,genre,cast,director,production,movRating,overview,theaterName,address,showTiming){
+   this.movieName=movieName;
+   this.rating = rating;
+   this.genre = genre;
+   this.cast = cast;
+   this.director = director;
+   this.production = production;
+   this.movRating = movRating;
+   this.overview =  overview;
+   this.theaterName = theaterName;
+   this.address = address;
+   this.showTiming = showTiming;
+   
+}
+
+$(document).ready(onReady);
+        function onReady(){
+               loadInitData();
+               
+        $("#CreateLink").on("click",function(){
+             
+                      $("#CreateDiv").show();	
+                      $("#ListDiv").hide();
+                      $("#DeleteDiv").hide();	
+                      $("#EditDiv").hide();
+                       $("#GenreDiv").hide();
+                      $("#TheaterDiv").hide(); 
+                       $("#RatingDiv").hide();
+                       $("#EditRatDiv").hide();
+                        $("#carousal").hide();
+                })   
+        
+        $("#ListLink").on("click",function(){
+            loadInitData();
+            
+            
+          var listTableBody = $("#listTableBody");
+          listTableBody.empty();
+          for(i=0;i<movieArray.length;i++){
+              movie = movieArray[i];
+        	  
+                   var row = $("<tr></tr>");
+                   var movieName=$("<td><img src='img/"+movie.movieName+".jpg' width='70' height='110'>"+movie.movieName+"</td>");
+                   var rating = $("<td>"+movie.rating+"</td>");
+                   var genre = $("<td>"+movie.genre+"</td>");
+                   var cast = $("<td>"+movie.cast+"</td>");
+                   var director = $("<td>"+movie.director+"</td>");
+                   var production = $("<td>"+movie.production+"</td>");
+                   var movRating = $("<td>"+movie.movRating+"</td>");
+                   //var overview =  $("<td colspan='5'>"+movie.overview+"</td>");
+                   var theaterName = $("<td>"+movie.theaterName+"</td>");
+                   var address = $("<td>"+movie.address+"</td>");
+                   var showTiming = $("<td>"+movie.showTiming+"</td>");
+             
+                   movieName.appendTo(row);
+                   rating.appendTo(row);
+                   genre.appendTo(row);
+                   cast.appendTo(row);
+                   director.appendTo(row);
+                   production.appendTo(row);
+                   movRating.appendTo(row);
+                  // overview.appendTo(row);
+                   theaterName.appendTo(row);
+                   address.appendTo(row);
+                   showTiming.appendTo(row);
+                   row.appendTo(listTableBody);
+              
+          }
+          $("#ListDiv").show();	
+          $("#CreateDiv").hide(); 
+          $("#DeleteDiv").hide();	
+          $("#EditDiv").hide();
+           $("#GenreDiv").hide();
+            $("#TheaterDiv").hide();
+            $("#RatingDiv").hide();
+            $("#EditRatDiv").hide();
+             $("#carousal").hide();
+        })
+        
+        $("#EditLink").on("click",function(){
+            
+           var movieNameSelect = $("#editMovieName");
+           movieNameSelect.empty();
+           movieNameSelect.append("<option>Select a Movie title</option>")
+           for(i=0;i<movieArray.length;i++){
+                    movie = movieArray[i];
+                    movieNameSelect.append('<option  value="' +i+ '"> ' + movie.movieName + '</option>');
+           } 
+          $("#EditDiv").show();	
+          $("#CreateDiv").hide();	
+          $("#ListDiv").hide();
+          $("#DeleteDiv").hide();
+           $("#GenreDiv").hide();
+            $("#TheaterDiv").hide();
+            $("#RatingDiv").hide();
+            $("#EditRatDiv").hide();
+             $("#carousal").hide();
+        }) ;
+        
+        
+        
+        
+             $("#EditLinkRat").on("click",function(){
+            
+           var movieNameSelect = $("#editMovieName");
+           movieNameSelect.empty();
+           movieNameSelect.append("<option>Select a Movie Title For Rating</option>")
+           for(i=0;i<movieArray.length;i++){
+                    movie = movieArray[i];
+                    movieNameSelect.append('<option  value="' +i+ '"> ' + movie.movieName + '</option>');
+           } 
+            $("#EditRatDiv").show();
+            $("#EditDiv").hide();	
+          $("#CreateDiv").hide();	
+          $("#ListDiv").hide();
+          $("#DeleteDiv").hide();
+           $("#GenreDiv").hide();
+            $("#TheaterDiv").hide();
+            $("#RatingDiv").hide();
+             $("#carousal").hide();
+          
+             
+            
+        }) ;
+        
+        
+        
+        
+        
+        
+        $("#DeleteLink").on("click",function(){
+            //location.reload();
+           var moviesLi = $("#movieUl")
+           moviesLi.empty();
+		   for(i=0;i<movieArray.length;i++){
+                      movie = movieArray[i];
+                      var li = $("<li><a href='javascript:deleteMovie("+i+")' id='deleteID_"+i+"'>"+movie.movieName+"</a></li>");
+                      li.appendTo(moviesLi);
+                    } 
+          $("#DeleteDiv").show();	
+          $("#EditDiv").hide();	
+          $("#CreateDiv").hide();	
+          $("#ListDiv").hide();	
+           $("#GenreDiv").hide();
+            $("#TheaterDiv").hide();
+            $("#RatingDiv").hide();
+            $("#EditRatDiv").hide();
+             $("#carousal").hide();
+        });
+        
+
+        
+        $("#movieGenre").on('click',function(){
+            
+           
+          var movieGenre =  $("#movieGenre").val();
+         
+          $.ajax({
+               type: "GET",
+               contentType:"application/json",
+               url: "rest/movieservice/moviegen/"+movieGenre,
+               dataType: 'json',
+               cache: false,
+               success: function (data, textStatus, xhr) {
+               	 createGenDataList(data);
+                 var listgenreTableBody = $("#listgenreTableBody");
+          listgenreTableBody.empty();
+          for(i=0;i<movieArrayGen.length;i++){
+              movie = movieArrayGen[i];
+        	  
+                   var row = $("<tr></tr>");
+                   var movieName=$("<td><img src='img/"+movie.movieName+".jpg' width='70' height='110'>"+movie.movieName+"</td>");
+                   var rating = $("<td>"+movie.rating+"</td>");
+                   var genre = $("<td>"+movie.genre+"</td>");
+                   var cast = $("<td>"+movie.cast+"</td>");
+                   var director = $("<td>"+movie.director+"</td>");
+                   var production = $("<td>"+movie.production+"</td>");
+                   var movRating = $("<td>"+movie.movRating+"</td>");
+                   //var overview =  $("<td colspan='5'>"+movie.overview+"</td>");
+                   var theaterName = $("<td>"+movie.theaterName+"</td>");
+                   var address = $("<td>"+movie.address+"</td>");
+                   var showTiming = $("<td>"+movie.showTiming+"</td>");
+             
+                   movieName.appendTo(row);
+                   rating.appendTo(row);
+                   genre.appendTo(row);
+                   cast.appendTo(row);
+                   director.appendTo(row);
+                   production.appendTo(row);
+                   movRating.appendTo(row);
+                  // overview.appendTo(row);
+                   theaterName.appendTo(row);
+                   address.appendTo(row);
+                   showTiming.appendTo(row);
+                   row.appendTo(listgenreTableBody);
+               } 
+              console.log(e);
+            
+                 
+               },
+               error: function (gendata, textStatus, errorThrown) {
+                   console.log(textStatus)
+               }
+           });
+           
+             $("#GenreDiv").show();              
+                      $("#CreateDiv").hide();	
+                      $("#ListDiv").hide();
+                      $("#DeleteDiv").hide();	
+                      $("#EditDiv").hide();
+                       $("#TheaterDiv").hide();
+                       $("#RatingDiv").hide();
+                       $("#EditRatDiv").hide();
+                        $("#carousal").hide();
+             
+        });
+        $("#movieTheater").on('click',function(){
+           var movieThe =  $("#movieTheater").val();
+         
+          $.ajax({
+               type: "GET",
+               contentType:"application/json",
+               url: "rest/movieservice/movietheater/"+movieThe,
+               dataType: 'json',
+               cache: false,
+               success: function (data, textStatus, xhr) {
+               	 createTheDataList(data);
+                 var listtheaterTableBody= $("#listtheaterTableBody");
+         listtheaterTableBody.empty();
+          for(i=0;i<movieArrayThe.length;i++){
+              movie = movieArrayThe[i];
+        	  
+                   var row = $("<tr></tr>");
+                   var movieName=$("<td><img src='img/"+movie.movieName+".jpg' width='70' height='110'>"+movie.movieName+"</td>");
+                   var rating = $("<td>"+movie.rating+"</td>");
+                   var genre = $("<td>"+movie.genre+"</td>");
+                   var cast = $("<td>"+movie.cast+"</td>");
+                   var director = $("<td>"+movie.director+"</td>");
+                   var production = $("<td>"+movie.production+"</td>");
+                   var movRating = $("<td>"+movie.movRating+"</td>");
+                   //var overview =  $("<td colspan='5'>"+movie.overview+"</td>");
+                   var theaterName = $("<td>"+movie.theaterName+"</td>");
+                   var address = $("<td>"+movie.address+"</td>");
+                   var showTiming = $("<td>"+movie.showTiming+"</td>");
+             
+                   movieName.appendTo(row);
+                   rating.appendTo(row);
+                   genre.appendTo(row);
+                   cast.appendTo(row);
+                   director.appendTo(row);
+                   production.appendTo(row);
+                   movRating.appendTo(row);
+                  // overview.appendTo(row);
+                   theaterName.appendTo(row);
+                   address.appendTo(row);
+                   showTiming.appendTo(row);
+                   row.appendTo(listtheaterTableBody);
+               } 
+              console.log(e);
+            
+                 
+               },
+               error: function (data, textStatus, errorThrown) {
+                   console.log(textStatus)
+               }
+           });
+                         $("#TheaterDiv").show();
+                       $("#GenreDiv").hide();              
+                      $("#CreateDiv").hide();	
+                      $("#ListDiv").hide();
+                      $("#DeleteDiv").hide();	
+                      $("#EditDiv").hide();
+                      $("#RatingDiv").hide();
+                      $("#EditRatDiv").hide();
+                       $("#carousal").hide();
+             
+        });
+      
+      
+       $("#movieRating").on('click',function(){
+           var movieRat =  $("#movieRating").val();
+         
+          $.ajax({
+               type: "GET",
+               contentType:"application/json",
+               url: "rest/movieservice/movierating/"+movieRat,
+               dataType: 'json',
+               cache: false,
+               success: function (data, textStatus, xhr) {
+               	 createRatDataList(data);
+                 var listratingTableBody= $("#listratingTableBody");
+         listratingTableBody.empty();
+          for(i=0;i<movieArrayRat.length;i++){
+              movie = movieArrayRat[i];
+        	  
+                   var row = $("<tr></tr>");
+                   var movieName=$("<td><img src='img/"+movie.movieName+".jpg' width='70' height='110'>"+movie.movieName+"</td>");
+                   var rating = $("<td>"+movie.rating+"</td>");
+                   var genre = $("<td>"+movie.genre+"</td>");
+                   var cast = $("<td>"+movie.cast+"</td>");
+                   var director = $("<td>"+movie.director+"</td>");
+                   var production = $("<td>"+movie.production+"</td>");
+                   var movRating = $("<td>"+movie.movRating+"</td>");
+                   //var overview =  $("<td colspan='5'>"+movie.overview+"</td>");
+                   var theaterName = $("<td>"+movie.theaterName+"</td>");
+                   var address = $("<td>"+movie.address+"</td>");
+                   var showTiming = $("<td>"+movie.showTiming+"</td>");
+             
+                   movieName.appendTo(row);
+                   rating.appendTo(row);
+                   genre.appendTo(row);
+                   cast.appendTo(row);
+                   director.appendTo(row);
+                   production.appendTo(row);
+                   movRating.appendTo(row);
+                  // overview.appendTo(row);
+                   theaterName.appendTo(row);
+                   address.appendTo(row);
+                   showTiming.appendTo(row);
+                   row.appendTo(listratingTableBody);
+               } 
+              console.log(e);
+            
+                 
+               },
+               error: function (data, textStatus, errorThrown) {
+                   console.log(textStatus)
+               }
+           });
+                        $("#RatingDiv").show(); 
+                        $("#TheaterDiv").hide();
+                       $("#GenreDiv").hide();              
+                      $("#CreateDiv").hide();	
+                      $("#ListDiv").hide();
+                      $("#DeleteDiv").hide();	
+                      $("#EditDiv").hide();
+                      $("#EditRatDiv").hide();
+                       $("#carousal").hide();
+             
+        });
+      
+      
+      
+      
+        $("#editMovieName").on('click',function(){
+             
+          var editMovieID =  $("#editMovieName").val();
+          try{
+        	  var movie = movieArray[editMovieID];
+                  
+        	  //$("#editMovieName").val(movie.movieName);
+                  $("#editRating").val(movie.rating);
+                  $("#editGenre").val(movie.genre); 
+                  $("#editCast").val(movie.cast);
+                  $("#editDirector").val(movie.director);
+                  $("#editProduction").val(movie.production);
+                  $("#editMovRating").val(movie.movRating);
+                  $("#editOverview").val(movie.overview);
+                  $("#editTheaterName").val(movie.theaterName);
+                  $("#editAddress").val(movie.address);
+                  $("#editShowTiming").val(movie.showTiming);
+                  
+          }catch(e){
+              console.log(e);
+          }
+        });
+        $('#Create').on("click",function(){
+                                var movieName = $("#createMovieName").val();
+				var rating = $("#createRating").val();
+                                var genre =  $("#createGenre").val();
+                                var cast =$("#createCast").val();
+                                var director = $("#createDirector").val();
+                                var production = $("#createProduction").val();
+                                var movRating = $("#createMovRating").val(); 
+                                var overview =   $("#createOverview").val();
+                                var theaterName = $("#createTheaterName").val();
+                                var address = $("#createAddress").val();
+                                var showTiming =  $("#createShowTiming").val();
+                                
+                var data = formToData(movieName, rating,genre,cast,director,production,movRating,overview,theaterName,address,showTiming);
+   				console.log(data);
+                                alert(data);
+				$.ajax({
+	                type: "POST",
+	                contentType:"application/json",
+	                url: "rest/movieservice/movie",
+	                dataType: 'json',
+	                data:data,
+	                cache: false,
+	                success: function (data, textStatus, xhr) {
+	                	console.log(textStatus);
+                                alert("Creation Of New Movie with name :"+ movieName +" is Successfully Done.");
+	                },
+	                error: function (data, textStatus, errorThrown) {
+	                    console.log(textStatus)
+	                }
+	            });
+        });
+
+       
+        
+        
+        
+        $('#Edit').on("click",function(){
+                    
+	           console.log("Inside Edit...");
+                   
+	           var editMovieID =  $("#editMovieName").val();
+	           console.log(editMovieID);
+                  		var movieName = movieArray[editMovieID].movieName;
+				var rating = $("#editRating").val();
+                                var genre =  $("#editGenre").val();
+                                var cast =  $("#editCast").val();
+                                var director = $("#editDirector").val();
+                                var production = $("#editProduction").val();
+                                var movRating = $("#editMovRating").val(); 
+                                var overview =   $("#editOverview").val();
+                                var theaterName = $("#editTheaterName").val();
+                                var address = $("#editAddress").val();
+                                var showTiming =  $("#editShowTiming").val();
+                                
+                   var data = formToData(movieName, rating,genre,cast,director,production,movRating,overview,theaterName,address,showTiming);
+                   console.log(data);
+                   $.ajax({
+	               type: "PUT",
+	               contentType:"application/json",
+	               url: "rest/movieservice/movie/"+movieName,
+	               dataType: 'json',
+	               data:data,
+	               cache: false,
+	               success: function (data, textStatus, xhr) {
+	               	console.log(textStatus);
+                            console.log("Inside Edit..."+ movieName +" Movie is Successfully Edited.");
+	               },
+	               error: function (data, textStatus, errorThrown) {
+	                   console.log(textStatus)
+	               }
+	           });
+	});
+        
+        
+        
+        
+        
+        
+        
+        
+	}
+        //loading all data using uri rest/movieservice/movies
+        function loadInitData(){
+    	   $.ajax({
+               type: "GET",
+               contentType:"application/json",
+               url: "rest/movieservice/movies",
+               dataType: 'json',
+               cache: false,
+               success: function (data, textStatus, xhr) {
+               	 createDataList(data);
+               },
+               error: function (data, textStatus, errorThrown) {
+                   console.log(textStatus)
+               }
+           });
+        }
+        function deleteMovie(deleteMovieID){
+	           console.log("Inside Delete...")
+	           console.log( movieArray[deleteMovieID].movieName);
+				var movieName = movieArray[deleteMovieID].movieName;
+                    $.ajax({
+	               type: "DELETE",
+	               contentType:"application/json",
+	               url: "rest/movieservices/movie/"+movieName,
+	               dataType: 'json',
+	               cache: false,
+	               success: function (data, textStatus, xhr) {
+	               	console.log(textStatus);
+                        alert("Deletion of "+ movieName +" Movie is Successfully Done.");
+	               },
+	               error: function (data, textStatus, errorThrown) {
+	                   console.log(textStatus)
+	               }
+	           });
+                    location.reload();
+
+	   }
+	
+        function createDataList(JsonObject){
+             movieArray.length = 0;
+           $.each(JsonObject,function(key,object){
+        	   var movie = new Movie(object.movieName, object.rating,object.genre,object.cast,object.director,object.production,object.movRating,object.overview,object.theaterName,object.address,object.showTiming);
+                   movieArray.push(movie);
+           });
+       }
+       function createTheDataList(JsonObject){
+              movieArrayThe.length = 0;
+           $.each(JsonObject,function(key,object){
+        	   var movie = new Movie(object.movieName, object.rating,object.genre,object.cast,object.director,object.production,object.movRating,object.overview,object.theaterName,object.address,object.showTiming);
+                   movieArrayThe.push(movie);
+           });
+       }
+       
+       
+          
+       function createGenDataList(JsonObject){
+              movieArrayGen.length = 0;
+           $.each(JsonObject,function(key,object){
+        	   var movie = new Movie(object.movieName, object.rating,object.genre,object.cast,object.director,object.production,object.movRating,object.overview,object.theaterName,object.address,object.showTiming);
+                   movieArrayGen.push(movie);
+           });
+       }
+       
+       function createRatDataList(JsonObject){
+              movieArrayRat.length = 0;
+           $.each(JsonObject,function(key,object){
+        	   var movie = new Movie(object.movieName, object.rating,object.genre,object.cast,object.director,object.production,object.movRating,object.overview,object.theaterName,object.address,object.showTiming);
+                   movieArrayRat.push(movie);
+           });
+       }
+               
+
+
+       
+        function formToData(movieName, rating,genre,cast,director,production,movRating,overview,theaterName,address,showTiming)
+        {
+          return JSON.stringify({
+              "movieName":movieName,
+              "rating":rating,
+              "genre":genre,
+              "cast":cast,
+              "director":director,
+              "production":production,
+              "movRating":movRating,
+              "overview":overview,
+              "theaterName":theaterName,
+              "address":address,
+              "showTiming":showTiming
+             
+          });
+          
+          
+          
+       }
+        $(function() {
+				$('#carousel-zw').carouFredSel({
+					auto: false,
+					items: {
+						visible: 1,
+						start: 1
+					}
+				});
+				$('#carousel-txt').carouFredSel({
+					auto: false,
+					items: 1,
+					scroll: {
+						fx: 'fade',
+						duration: 2000
+					}
+				});
+				$('#carousel-fc').carouFredSel({
+					synchronise: [ ['#carousel-zw'], ['#carousel-txt', false] ],
+					items: 1,
+					scroll: {
+						duration: 1000,
+						timeoutDuration: 3000
+					},
+					prev: '#prev',
+					next: '#next'
+				});
+			});
+          
+      
+       
+</script>
+
+
+
+</head>
+<body id="body" background="img/wall.jpg">
+	
+        <img src="img/logo.png">
+        <table align="left"><tr><td valign="top" >
+        <ul>
+            <li><a href="#" id="ListLink">List All Movies. "GET"</a><br></li>
+                
+                <li><a href="#" id="CreateLink">Create Movie. "POST"</a><br></li>
+		<li><a href="#" id="EditLink">Edit Movie By Name. "PUT"</a><br></li>
+		<li><a href="#" id="DeleteLink">Delete Movie. "DELETE"</a><br></li>
+                <li><a href="#" id="EditLinkRat">Edit Movie Rating</a><br></li>
+                <fieldset style="width:180px">
+                <legend><b>Search Movie By</b></legend>
+                <li>
+                           </label><select id='movieGenre'>
+                                        <option>Search By Movie Genre </option>                   
+                                        <option>Action</option>
+                                        <option>Comedy</option>
+                                        <option>Drama</option>
+                                        <option>Documentary</option>
+                                        <option>Thriller</option>
+                                    <option>fiction</option>
+                                    <option>Musical</option>
+                                  
+                                    </select>	<br></li>
+               <li>
+                           </label><select id='movieTheater'>
+                                        <option>Search By Movie Theater</option>
+                                        <option>Cine</option>
+                                        <option>Beechwood Stadium</option>
+                                        <option>UGA Tate Movie Theater</option>
+                                        <option>University 16 Cinemas</option>
+                                       
+                                  
+                                    </select>	<br></li>
+                                    
+                                    
+                                    <li>
+                                        
+                            </label><select id='movieRating'>
+                                        <option>Search By Movies Rating </option> 
+                                        <option>5</option>
+                                        <option>4</option>
+                                        <option>3</option>
+                                        <option>2</option>
+                                        <option>1</option>
+                        </select><br>
+                                    </li>
+                            </fieldset>
+              
+		
+                
+	</ul>
+                </td>
+                
+                
+                
+                <td> 
+                    
+                    
+                    
+         <div id="carousal">            
+                    
+                     <div id="outer">
+			<div id="inner">
+				<div id="carousel-fc" class="carousel">
+					<img src="img/Taken 3.jpg" width="400" height="530" />
+					<img src="img/Strange Magic.jpg" width="400" height="530" />
+					<img src="img/Paddington.jpg" width="400" height="530" />
+					<img src="img/The Imitation Game.jpg" width="400" height="530" />
+                                        <img src="img/The Loft .jpg" width="400" height="530" />
+				</div>
+				<div id="carousel-zw" class="carousel">
+					<img src="img/Taken 3-zw.JPG" width="400" height="530" />
+					<img src="img/Strange Magic-zw.JPG" width="400" height="530" />
+					<img src="img/Paddington-zw.JPG" width="400" height="530" />
+					<img src="img/The Imitation Game-zw.JPG" width="400" height="530" />
+                                        <img src="img/The Loft -zw.JPG" width="400" height="530" />
+				</div>
+				<div id="carousel-txt" class="carousel">
+                                    
+                                  	<h3>Taken 3</h3>
+					<h3>Strange Magic</h3>
+					<h3>Paddington</h3>
+					<h3>The Imitation Game</h3>
+                                        <h3>The Loft </h3>
+				</div>
+				<div id="overlay"></div>
+				<a href="#" id="prev">&lsaquo;</a>
+				<a href="#" id="next">&rsaquo;</a>
+			</div>
+		</div>
+         </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!--GET-->
+	<div class="form-style-2" id="ListDiv" hidden="true">
+		<table class="bordered">
+			<thead>
+                            <tr>
+                                <td><b>Movie Name</b></td> 
+                                        <td><b>Rating</b></td>
+                                        <td><b>Genre</b></td>
+                                        <td><b>Cast</b></td>
+                                        <td><b>Director</b></td>
+                                        <td><b>Production</b></td>
+                                        <td><b>Movie Rating</b></td>
+                                        <td><b>Theater Name</b></td>
+                                        <td><b>Address</b></td>
+                                        <td><b>Show Timing</b></td>
+      			</tr>
+			</thead>
+                            <tbody id="listTableBody">
+			</tbody>
+		</table>
+	</div>
+                    
+                    
+                    
+                    
+                    
+                <div class="form-style-2" id="GenreDiv" hidden="true">
+		
+			<table class="bordered">
+			<thead>
+                            <tr>
+                                <td><b>Movie Name</b></td> 
+                                        <td><b>Rating</b></td>
+                                        <td><b>Genre</b></td>
+                                        <td><b>Cast</b></td>
+                                        <td><b>Director</b></td>
+                                        <td><b>Production</b></td>
+                                        <td><b>Movie Rating</b></td>
+                                        <td><b>Theater Name</b></td>
+                                        <td><b>Address</b></td>
+                                        <td><b>Show Timing</b></td>
+      			</tr>
+			</thead>
+                            <tbody id="listgenreTableBody">
+			</tbody>
+		</table>
+                            
+		
+	</div><div class="form-style-2" id="TheaterDiv" hidden="true">
+		
+			<table class="bordered">
+			<thead>
+                            <tr>
+                                <td><b>Movie Name</b></td> 
+                                        <td><b>Rating</b></td>
+                                        <td><b>Genre</b></td>
+                                        <td><b>Cast</b></td>
+                                        <td><b>Director</b></td>
+                                        <td><b>Production</b></td>
+                                        <td><b>Movie Rating</b></td>
+                                        <td><b>Theater Name</b></td>
+                                        <td><b>Address</b></td>
+                                        <td><b>Show Timing</b></td>
+      			</tr>
+			</thead>
+                            <tbody id="listtheaterTableBody">
+			</tbody>
+		</table>
+                            
+		
+	</div>
+                    
+         </div><div class="form-style-2" id="RatingDiv" hidden="true">
+		
+			<table class="bordered">
+			<thead>
+                            <tr>
+                                <td><b>Movie Name</b></td> 
+                                        <td><b>Rating</b></td>
+                                        <td><b>Genre</b></td>
+                                        <td><b>Cast</b></td>
+                                        <td><b>Director</b></td>
+                                        <td><b>Production</b></td>
+                                        <td><b>Movie Rating</b></td>
+                                        <td><b>Theater Name</b></td>
+                                        <td><b>Address</b></td>
+                                        <td><b>Show Timing</b></td>
+      			</tr>
+			</thead>
+                            <tbody id="listratingTableBody">
+			</tbody>
+		</table>
+                            
+		
+	</div>
+        
+                    
+                    
+                    
+                    
+                    
+                     <!--POST/create-->
+	<div style="width: 600px; float: left;" class="form-style-2" id="CreateDiv" hidden="true">
+           	
+            <fieldset>
+                <legend><b>Create a new Movie</b></legend>
+                        <table> 
+                        <tr><td><label>Movie Name :</label></td><td><input type='text' id='createMovieName' size='25'></td></tr>
+                        <tr><td><label>User Rating :</label></td><td><input type='text' id='createRating' size='25'></td></tr>
+                        <tr><td><label>Genre :</label></td><td><input type='text' id='createGenre' size='25'></td></tr>
+                        <tr><td><label>Cast :</label></td><td><input type='text' id='createCast' size='25'></td></tr>
+                        <tr><td><label>Director :</label></td><td><input type='text' id='createDirector' size='25'></td></tr>
+                        <tr><td><label>Production :</label></td><td><input type='text' id='createProduction' size='25'></td></tr> 
+                        <tr><td><label>Movie Rating :</label></td><td><input type='text' id='createMovRating' size='25'></td></tr> 
+                        <tr><td><label>Overview :</label></td><td><textarea rows='5' cols='25' id='createOverview'></textarea></td></tr>
+                        <tr><td><label>Theater Name :</label></td><td><input type='text' id='createTheaterName' size='25'></td></tr>
+                        <tr><td><label>Address :</label></td><td><input type='text' id='createAddress' size='25'></td></tr>
+                        <tr><td><label>Show Timing :</label></td><td><input type='text' id='createShowTiming' size='25'></td></tr>
+                        <tr><td> </td><td> </td></tr>
+                        </table>
+			<form name="createMovie" method="post" action="rest/movieservice/movie" id="createMovie">
+                            <div style="float: right;">
+					<input type="button" value="Create" align="right" id="Create">
+					<input type="button" value="Clear" align="right">
+				</div>
+			</form>
+		</fieldset>
+            
+        </div>
+                   <!--PUT/edit-->         
+
+                   
+          <div style="width: 600px; float: left;" class="form-style-2" id="EditRatDiv" hidden="true">
+		 <fieldset>
+                     <legend><b>Edit Movie Rating</b></legend>
+                        <table>
+                            <tr><td><label>Movie Name :</label></td><td><select id='editMovieName'><option>Select a Movie
+                                            title</option></select>	</td></tr>
+                            <tr><td><label>User Rating :</label></td><td>
+                                    
+                         
+                                    
+                                      <input type='text' id='editRating' size='25' >
+                                  
+                                    
+                                    
+                                  </td></tr>
+                      
+                            
+                           
+                        
+                        
+                        </table>
+			<form name="editMovie" method="post" action="rest/movieservice/movie" id="editMovie">
+                            <div style="float: right;">
+				<input type="button" value="Edit" align="right" id="Edit">
+                                <input type="button" value="Clear" align="right">
+                            </div>
+			</form>
+                            
+		</fieldset>
+	</div>   
+                   
+                   
+                   
+                   
+                   
+	<div style="width: 600px; float: left;" class="form-style-2" id="EditDiv" hidden="true">
+		 <fieldset>
+                     <legend><b>Edit Movie Info</b></legend>
+                        <table>
+                            <tr><td><label>Movie Name :</label></td><td><select id='editMovieName'><option>Select a Movie
+                                            title</option></select>	</td></tr>
+                            <tr><td><label>User Rating :</label></td><td><input type='text' id='editRating' size='25'></td></tr>
+                            <tr><td><label>Genre :</label></td><td><input type='text' id='editGenre' size='25'></td></tr>
+                            <tr><td><label>Cast :</label></td><td><input type='text' id='editCast' size='25'></td></tr>
+                            <tr><td><label>Director :</label> </td><td><input type='text' id='editDirector' size='25'></td></tr>
+                            <tr><td><label>Production :</label></td><td><input type='text' id='editProduction' size='25'></td></tr>
+                            <tr><td><label>Movie Rating :</label></td><td><input type='text' id='editMovRating' size='25'></td></tr>
+                            <tr><td><label>Overview :</label></td><td><textarea rows='5' cols='25' id='editOverview'></textarea></td></tr>
+                            <tr><td><label>Theater Name :</label></td><td><input type='text' id='editTheaterName' size='25'></td></tr>
+                            <tr><td><label>Address :</label></td><td><input type='text' id='editAddress' size='25'></td></tr>
+                            <tr><td><label>Show Timing :</label></td><td><input type='text' id='editShowTiming' size='25'></td></tr>
+                        </table>
+			<form name="editMovie" method="post" action="rest/movieservice/movie" id="editMovie">
+                            <div style="float: right;">
+				<input type="button" value="Edit" align="right" id="Edit">
+                                <input type="button" value="Clear" align="right">
+                            </div>
+			</form>
+                            
+		</fieldset>
+	</div>
+                   
+           <!--DELETE-->
+	<div style="width: 450px; float: left;" id="DeleteDiv" hidden="true">
+		<h3>Select a Movie to Delete</h3>
+		<ul id="movieUl">
+		</ul>
+	</div>
+                </td></tr>
+        </table>
+</body>
+</html>
